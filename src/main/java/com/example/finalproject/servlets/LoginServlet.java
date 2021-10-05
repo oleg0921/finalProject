@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
 
         response.setContentType("text/html");
 
+
         String email = request.getParameter("emailField");
         String password  = request.getParameter("passwordField");
 
@@ -41,19 +42,25 @@ public class LoginServlet extends HttpServlet {
 
         if(password.equals(userDto.getPassword())) {
 
+
+            HttpSession session = request.getSession();
+            // session.setAttribute("username",username);
+
             switch (roleDto.getName())
             {
                 case "speaker":
                     //   getServletContext().getRequestDispatcher("/basic.jsp").forward(request, response);  moderatorPage.jsp   simpleUserPage.jsp speakerPage.jsp
+                     session.setAttribute("user",userDto);
                      response.sendRedirect("speakerPage.jsp");
                     break;
 
                 case "moderator":
+                    session.setAttribute("user",userDto);
                     response.sendRedirect("moderatorPage.jsp");
                     break;
 
                 case "simple user":
-
+                    session.setAttribute("user",userDto);
                     response.sendRedirect("simpleUserPage.jsp");
                     break;
             }

@@ -1,5 +1,7 @@
 package com.example.finalproject.request;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class EventRequest {
@@ -15,6 +17,12 @@ public class EventRequest {
 
     public EventRequest() {
 
+    }
+
+    public static Date convertLocalDateTimeToDateUsingInstant(LocalDateTime dateToConvert) {
+        return java.util.Date
+                .from(dateToConvert.atZone(ZoneId.systemDefault())
+                        .toInstant());
     }
 
     private Date startEvent;
